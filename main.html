@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generator Link Undangan WA Personalisasi - Terang Modern</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --wa-green: #101211; /* Warna Aksen WhatsApp */
+            --wa-dark-green: #014b42;
+            --primary-blue: #007bff; /* Biru Primer yang standar */
+            --light-bg: #f8f9fa; /* Latar belakang terang */
+            --box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Shadow lebih ringan */
+            --border-radius: 10px;
+        }
+
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            max-width: 900px; 
+            margin: 0 auto; 
+            padding: 20px; 
+            background-color: var(--light-bg); 
+            color: #333; 
+        }
+        
+        .container { 
+            background-color: white; 
+            padding: 30px; 
+            border-radius: var(--border-radius); 
+            box-shadow: var(--box-shadow); 
+        }
+
+        h1 { 
+            color: #333; 
+            text-align: center; 
+            margin-bottom: 5px;
+            font-weight: 700;
+            display: flex; 
+            flex-direction: column;
+            align-items: center;
+            gap: 10px; 
+        }
+
+        .logo {
+            max-width: 180px; 
+            height: auto;
+            margin-bottom: 10px; 
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #6c757d; 
+            margin-bottom: 25px;
+        }
+
+        label { 
+            display: block; 
+            margin-top: 20px; 
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #495057; 
+        }
+        
+        textarea, input[type="text"] { 
+            width: 100%; 
+            padding: 12px; 
+            background-color: white;
+            color: #333;
+            border: 1px solid #ced4da; 
+            border-radius: 8px; 
+            box-sizing: border-box; 
+            transition: border-color 0.3s;
+            font-size: 14px;
+        }
+        
+        textarea:focus, input[type="text"]:focus {
+            border-color: var(--wa-green); 
+            outline: none;
+        }
+        
+        .placeholder-hint {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            text-align: center;
+            border: 1px solid #ffeeba;
+        }
+
+        /* --- Tombol Utama --- */
+        button#generate-btn { 
+            width: 100%;
+            background-color: var(--wa-green); 
+            color: white; 
+            padding: 15px; 
+            border: none; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-size: 18px;
+            font-weight: 600;
+            margin-top: 30px;
+            transition: background-color 0.3s, transform 0.1s;
+            letter-spacing: 0.5px;
+        }
+        
+        button#generate-btn:hover { 
+            background-color: var(--wa-dark-green); 
+            transform: translateY(-1px);
+        }
+        
+        button#generate-btn:active {
+            transform: translateY(1px);
+        }
+
+        /* --- Hasil Output --- */
+        #hasil-output { 
+            margin-top: 30px; 
+            padding-top: 20px; 
+            border-top: 2px solid #e9ecef; 
+        }
+
+        h2 {
+            color: #343a40;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        .link-item { 
+            background-color: #e6ffe6; 
+            padding: 15px; 
+            border-radius: 8px; 
+            margin-bottom: 15px; 
+            word-wrap: break-word;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #d4edda;
+        }
+        
+        .link-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .link-actions {
+            display: flex;
+            gap: 10px; 
+            margin-top: 10px;
+        }
+
+        .link-actions button, .link-actions a {
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: opacity 0.3s, background-color 0.3s;
+            text-decoration: none;
+            text-align: center;
+            border: none;
+        }
+        
+        .copy-wa-btn { 
+            background-color: #007bff; 
+            color: white;
+            flex-grow: 1;
+        }
+
+        .copy-wa-btn:hover { 
+            background-color: #0056b3; 
+        }
+        
+        .copy-undangan-btn { 
+            background-color: #ffc107; /* Kuning untuk link undangan */
+            color: #333;
+            flex-grow: 1;
+        }
+
+        .copy-undangan-btn:hover { 
+            background-color: #e0a800; 
+        }
+
+        .wa-btn { 
+            background-color: var(--wa-green); 
+            color: white; 
+            white-space: nowrap; 
+            flex-grow: 2; /* Lebih besar */
+        }
+
+        .wa-btn:hover {
+            background-color: var(--wa-dark-green);
+        }
+        
+        .link-text-container {
+            font-size: 12px;
+            color: #555; 
+            padding: 5px;
+            border: 1px dashed #ddd; 
+            background-color: #f0fff0;
+            border-radius: 4px;
+            margin-bottom: 5px;
+        }
+        
+        .link-text-container a {
+            color: var(--primary-blue); 
+            word-break: break-all;
+        }
+        
+        strong.guest-name {
+            font-size: 18px;
+            color: #333; 
+            font-weight: 600;
+        }
+        
+        /* Responsif Sederhana */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            .link-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .link-actions {
+                width: 100%;
+                margin-top: 10px;
+                gap: 5px;
+                flex-wrap: wrap; 
+            }
+            .link-actions button, .link-actions a {
+                flex-grow: 1;
+                min-width: 45%; 
+            }
+            .logo { 
+                max-width: 120px; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>
+            <img src="1.png" alt="Logo" class="logo">
+            Generator Link Undangan WA
+        </h1>
+        <div class="placeholder-hint">
+            Gunakan **<code>{{NAMA_TAMU}}</code>** sebagai placeholder di template pesan.
+        </div>
+        
+        <label for="base-undangan-link">Link Undangan Utama Anda (URL Basis, cth: https://nikah.com/yuda-regitha):</label>
+        <input type="text" id="base-undangan-link" value="https://yuda-regitha.vercel.app/" placeholder="Masukkan URL undangan online Anda">
+
+
+        <label for="template-pesan">Template Pesan Undangan (Termasuk Link Undangan Utama):</label>
+        <textarea id="template-pesan" rows="8">Kepada Yth.
+Bapak/Ibu/Saudara/i/Dharma Semeton
+{{NAMA_TAMU}}
+
+Om Swastyastu.
+Kami bermaksud melaksanakan Upacara Pawiwahan putra-putri kami: Kadek Yuda Kumala T.D. S.H. dengan A.A. Istri Regitha Cahyani S.S.
+
+Hari, Tanggal: Jumat, 09 Januari 2026
+Waktu: 13.00 WITA - Selesai
+Tempat : Jalan MAwar No. 8, Kelurahan Cempaga, Kabupaten Bangli
+
+Untuk melihat lokasi, rincian acara, dan memberikan konfirmasi kehadiran (RSVP), silakan klik tautan undangan personal Anda di bawah ini:
+[LINK_UNDANGAN_PERSONAL]
+
+Sesuai ajaran Veda: "Moksartham Jagadhita Ya Ca Iti Dharma" (Tujuan hidup adalah mencapai kebahagiaan rohani dan kesejahteraan duniawi). Semoga kehadiran Anda menjadi bagian dari Yadnya kami.
+
+Om Shanti Shanti Shanti Om
+Hormat Kami, Keluarga Besar Kadek Yuda & A.A. Istri Regitha.        
+        </textarea>
+
+        <label for="daftar-tamu">Daftar Nama Tamu (Satu Nama Per Baris, Contoh: I Gede Agung/Luh Putu Ratih/Bpk. Made)</label>
+        <textarea id="daftar-tamu" rows="8">Ovie
+Vicky 
+Kak Indra
+Pak Cipto 
+Bu Dayu Alit 
+Mbo Gek Sintha 
+Mbo Luh De 
+Bli Yudhi 
+Kak Yan 
+Bligus Adi 
+Pak Man Kicer 
+Pak Man Budhita 
+Ibu Vera 
+Ibu Mila 
+Mbo Gek Mas 
+Mbo Ratih Deviantari 
+Mbo Widya 
+Anila 
+Sathya 
+Adira 
+Ibu Eka Andewi 
+Ibu Dayu Dewi 
+Mbo Lisna 
+Bli Dede 
+Trisna 
+Ibu Ita Rahyuda 
+Mbo Atik 
+Bli Dedik 
+Bli Meka 
+Bli Darma 
+Ibu Dayu Tresna 
+Mba Dista 
+Mbo Ayin 
+Mbo Gek Andres 
+Gita 
+Sintia 
+Acintya 
+Mbo Gek Ari 
+Bayu 
+Mbo Gung Risna 
+Mbo Gek Diah 
+Mbo Ratih
+Mbo Thia 
+Mbo Gek Ira 
+Mbo Rahayu 
+Kak Ayu 
+Winda 
+Ibu Mang Diah 
+Jik Lanang 
+Kak Tria 
+Mbo Khris 
+Mbo Devi 
+Kak Hadi 
+Kak Widi 
+Mbo Rina 
+Mbo Ari 
+Monica 
+Bli Winata Bali Post 
+Pak Yan Suka 
+Desak 
+Andika 
+Bli Riyasa 
+Bli Gung Santika 
+Ega 
+Sri Suprianingsih 
+Wina 
+Dek Aries 
+Putri 
+Wida & Suami 
+Boy 
+Angga Rayana 
+Astika 
+Sarilan 
+Sita 
+Yis 
+Luhde 
+Sakila & Suami 
+Sri Wahyuni & Suami 
+Siska 
+Omang Sri 
+Indah & Indra 
+Angkatan 2024
+Mega & Sima 
+Yuli 
+Jro Wulan 
+Ibu Erna & Suami 
+Mbo Vitri 
+Onik & Valdi 
+Christin 
+Agyl 
+Lulu Bersaudara 
+Fiona 
+Ade Deswitha 
+Mbo Gek Indri 
+Mbok Dewi & Tim Salon 
+Mbo Maya Balipost 
+Vika & Suami 
+Mbo Sukam Bali TV 
+Kanaya Erika 
+Inge 
+Desak Oman 
+Wiradana & Nika 
+Gung Lia & Panca 
+Leo 
+Widya 
+Gek Ita & Jaya 
+Pradnyan & Yudana 
+Satria 
+Ari Wiguna 
+Alit Mahardini 
+Gek In 
+Kak Tia Andriani
+Devi Natalia 
+Liliani Artha 
+Rosa Pradina 
+Carma 
+Itha 
+Sintya Yulia 
+Kak Abi 
+Bapak Onik & Istri 
+Anggriani Risna 
+Erin
+Ko tommy
+Dek Li
+Anya
+Bli Mang Budi
+Kak Ardi
+Grup IPA 5 
+Bu Anik & Bapak Edi 
+Ibu Puspita & Dokter Wirawan 
+Ibu Erni & Pak Made
+Ibu Wirati & Suami 
+Ibu Verasani
+
+
+</textarea>
+
+        <button id="generate-btn" onclick="generateLinks()"> Buat Link WA Personalisasi</button>
+
+        <div id="hasil-output">
+            <h2>Hasil Link Undangan</h2>
+            <div id="output-list">
+                </div>
+        </div>
+    </div>
+
+    <script>
+        // Fungsi Utama untuk menghasilkan link WA
+        function generateLinks() {
+            const templatePesan = document.getElementById('template-pesan').value;
+            const daftarTamuInput = document.getElementById('daftar-tamu').value;
+            const baseUndanganLink = document.getElementById('base-undangan-link').value.trim();
+            const outputList = document.getElementById('output-list');
+            outputList.innerHTML = ''; 
+
+            if (!templatePesan || !daftarTamuInput || !baseUndanganLink) {
+                alert('Semua kolom input (Template, Daftar Tamu, Link Utama) tidak boleh kosong!');
+                return;
+            }
+
+            const daftarTamu = daftarTamuInput.split('\n')
+                                                .map(nama => nama.trim()) 
+                                                .filter(nama => nama.length > 0); 
+
+            if (daftarTamu.length === 0) {
+                alert('Mohon masukkan minimal satu nama tamu.');
+                return;
+            }
+
+            daftarTamu.forEach(namaTamu => {
+                // 1. Buat Link Undangan Personalisasi (dengan parameter ?to=NamaTamu)
+                // Ganti spasi dengan + untuk format URL Query yang baik
+                const namaTamuEncodedForURL = namaTamu.replace(/\s+/g, '+'); 
+                const undanganLinkPersonal = `${baseUndanganLink}?to=${namaTamuEncodedForURL}`;
+                
+                // 2. Buat Template Pesan WA 
+                // Ganti placeholder {{NAMA_TAMU}} dan [LINK_UNDANGAN_PERSONAL] di template
+                let pesanPersonal = templatePesan
+                                    .replace(/{{NAMA_TAMU}}/g, namaTamu)
+                                    .replace(/\[LINK_UNDANGAN_PERSONAL\]/g, undanganLinkPersonal)
+                                    .trim();
+
+                // 3. Buat Link WA (dengan pesanEncoded)
+                let pesanEncoded = encodeURIComponent(pesanPersonal);
+                let waLink = `https://wa.me/?text=${pesanEncoded}`;
+                
+                const linkItem = document.createElement('div');
+                linkItem.className = 'link-item';
+                
+                // Tampilkan nama tamu, link WA, dan link Undangan Personal
+                linkItem.innerHTML = `
+                    <div class="link-header">
+                        <strong class="guest-name">Kepada: ${namaTamu}</strong>
+                    </div>
+                    <div class="link-text-container">
+                        <small><strong>Link Undangan Personal:</strong></small> <a href="${undanganLinkPersonal}" target="_blank">${undanganLinkPersonal}</a>
+                    </div>
+                    <div class="link-text-container">
+                        <small><strong>Link WA:</strong></small> <a href="${waLink}" target="_blank">${waLink.length > 80 ? waLink.substring(0, 80) + '...' : waLink}</a>
+                    </div>
+                    <div class="link-actions">
+                        <a href="${waLink}" target="_blank" class="wa-btn">💬 Kirim ke WA</a>
+                        <button class="copy-wa-btn" onclick="copyToClipboard('${waLink}')">📋 Salin Link WA</button>
+                        <button class="copy-undangan-btn" onclick="copyToClipboard('${undanganLinkPersonal}')">📋 Salin Link Undangan</button>
+                    </div>
+                `;
+
+                outputList.appendChild(linkItem);
+            });
+        }
+
+        // Fungsi untuk menyalin link ke clipboard (tidak diubah)
+        function copyToClipboard(text) {
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(() => {
+                    alert('Link berhasil disalin ke clipboard!');
+                }).catch(err => {
+                    console.error('Gagal menyalin (Clipboard API): ', err);
+                    fallbackCopyTextToClipboard(text);
+                });
+            } else {
+                fallbackCopyTextToClipboard(text);
+            }
+        }
+        
+        function fallbackCopyTextToClipboard(text) {
+            var textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-999999px";
+            textArea.style.top = "-999999px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                var successful = document.execCommand('copy');
+                var msg = successful ? 'berhasil' : 'gagal';
+                alert('Link berhasil disalin secara manual ke clipboard!');
+            } catch (err) {
+                console.error('Gagal menyalin (manual): ', err);
+                alert('Gagal menyalin link. Mohon salin manual.');
+            }
+            document.body.removeChild(textArea);
+        }
+    </script>
+</body>
+</html>
